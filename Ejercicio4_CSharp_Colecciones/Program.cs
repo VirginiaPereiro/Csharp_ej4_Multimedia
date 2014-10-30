@@ -12,6 +12,9 @@ namespace Ejercicio4_CSharp_Colecciones
         {
             //creamos un objeto de tipo IOperaciones
             //que es el interfaz que tiene los métodos
+            //esto es lo único que está acoplado OperacionMultimediaLista, 
+            //es lo que habrá que cambiar para que quede actualizado
+            //programación orientada a las interfaces, por ser más actualizables
             IOperaciones<Multimedia>ope=new OperacionMultimediaLista();
             int codigo = 0;
 
@@ -61,6 +64,7 @@ namespace Ejercicio4_CSharp_Colecciones
                 int pag;
                 int.TryParse(Console.ReadLine(), out pag);
 
+                //devuelve el objeto enum
                 Console.WriteLine("Idioma 0.Español 1.Inglés 2.Francés 3.Chino");
                 int idi = 0;
                 int.TryParse(Console.ReadLine(), out idi);
@@ -73,9 +77,14 @@ namespace Ejercicio4_CSharp_Colecciones
                 int dur;
                 int.TryParse(Console.ReadLine(), out dur);
 
+                //al hacer la enumeración sólo va a coger de los que hay ya metidos,
+                //si metemos otro que no exista, pondrá el primeros de ellos
+                //ó en el caso de tener uno por defecto mostraría ese
+                //mejor forma que de como se ha hecho con idioma que se ha hecho un casting
                 Console.WriteLine("Formato");
                 Formato forma;
-                Formato.TryParse(Console.ReadLine(), true, out forma);
+                //Formato.TryParse(Console.ReadLine(), true, out forma);//también se puede poner así
+                Enum.TryParse(Console.ReadLine(), true, out forma);
 
                 ope.Add(new Cancion(tit,aut,ope.GetCodigo(),dur,forma));
             }
